@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xcrossing Lines New Job</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+
+        /*variables*/
+        --main-bg-color: #e0e0e09d;
+        --primary-color: #73c2fb;
+        --secondary-color: #272460;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- job notification header -->
+    <header
+      style="
+        font-size: xx-large;
+        background-color: #272460;
+        color: #ffffff;
+        padding: 2rem 1rem;
+        width: 100%;
+      "
+    >
+      <strong>Thank</strong> you for booking with xcrossinglines.
+    </header>
+    <!-- job notification header -->
+    <!-- job introduction-->
+    <div
+      style="
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
+        background-color: #e0e0e09d;
+      "
+    >
+      <!--Table-->
+      <table style="width: 100%">
+        <!--Reference -->
+        <thead>
+          <tr>
+            <td
+              colspan="1"
+              style="
+                padding-bottom: 1rem;
+                background-color: transparent;
+                font-weight: bold;
+                font-size: 1rem;
+                text-align: end;
+              "
+            >
+              <span
+                >Job Reference:
+                <span
+                  style="font-weight: normal; font-weight: bold; color: #272460"
+                  >Invoice {{id}}</span
+                ></span
+              >
+            </td>
+          </tr>
+        </thead>
+        <!--Reference -->
+        <!-- job introduction-->
+        <tbody>
+          <!-- job Greeting-->
+          <tr>
+            <td>Hello <strong>{{cName}}</strong></td>
+          </tr>
+          <tr>
+            <td style="padding-bottom: 1rem">
+              <span
+                >Thank you for booking with XCrossing Lines Transport. Our
+                driver will call you 1 hour prior, informing you that they are
+                on their way to make your job. Please contact admin for any
+                queries.
+              </span>
+            </td>
+          </tr>
+          <!-- job Greeting-->
+          <!-- job Details-->
+          <tr style="background-color: #ffffff">
+            <td style="padding: 1rem; width: 100%">
+              <table style="width: 100%">
+                <tr>
+                  <td colspan="1" style="font-weight: bold; color: #272460">
+                    Date
+                  </td>
+                  <td colspan="1" style="text-align: end">{{date}}</td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="font-weight: bold; color: #272460">
+                    Time
+                  </td>
+                  <td colspan="1" style="text-align: end">{{time}}</td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="font-weight: bold; color: #272460">
+                    No. Helpers
+                  </td>
+                  <td colspan="1" style="text-align: end">{{helpers}}</td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="font-weight: bold; color: #272460">
+                    No. Floors
+                  </td>
+                  <td colspan="1" style="text-align: end">{{floors}}</td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="font-weight: bold; color: #272460">
+                    Distance
+                  </td>
+                  <td colspan="1" style="text-align: end">{{distance}} km</td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="font-weight: bold; color: #272460">
+                    Vehicle type
+                  </td>
+                  <td colspan="1" style="text-align: end">{{vSize}} ton</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- job Details-->
+          <!-- Job Invoice-->
+          <tr style="background-color: #ffffff">
+            <td style="padding: 1rem; width: 100%">
+              <table style="width: 100%">
+                <tr>
+                  <td colspan="1" style="font-weight: bold; color: #272460">
+                    Base fee
+                  </td>
+                  <td colspan="1" style="text-align: end">R {{quote}}</td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="font-weight: bold; color: #272460">
+                    Off peak
+                  </td>
+                  <td colspan="1" style="text-align: end; color: red">
+                    - R {{mDiscount}}
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="font-weight: bold; color: #272460">
+                    Referal discount
+                  </td>
+                  <td colspan="1" style="text-align: end; color: red">
+                    - R {{rDiscount}}
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="font-weight: bold; color: #272460">
+                    <hr
+                      color="grey"
+                      style="height: 2px; padding: 0; margin: 8px 0px"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="font-weight: bold; color: #272460">
+                    Amount due
+                  </td>
+                  <td colspan="1" style="text-align: end">
+                    <span
+                      style="
+                        font-size: 0.625rem;
+                        font-weight: bold;
+                        text-align: center;
+                      "
+                      >{{paymentOption}}</span
+                    >
+                    R {{amountDue}}
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="font-weight: bold; color: #272460">
+                    <hr
+                      color="grey"
+                      style="height: 2px; padding: 0; margin: 8px 0px"
+                    />
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr style="text-align: end">
+            <td
+              style="text-align: end; padding-bottom: 1rem; padding-top: 1rem"
+            >
+              <a
+                href="{{jobLink}}"
+                target="_blank"
+                rel="noreferrer"
+                style="text-decoration: none; color: #73c2fb; font-weight: bold"
+                >View complete job</a
+              >
+            </td>
+          </tr>
+          <!-- Job Invoice-->
+          <!--Banking Details-->
+          <tr style="text-align: start">
+            <td>Bank name: <strong>Capitec Bank</strong></td>
+          </tr>
+          <tr style="text-align: start">
+            <td>Account holder: <strong>Ms NM Msibi</strong></td>
+          </tr>
+          <tr style="text-align: start">
+            <td>Account type: <strong>Savings account</strong></td>
+          </tr>
+          <tr style="text-align: start">
+            <td style="padding-bottom: 1rem">
+              Account No.: <strong>1588362491</strong>
+            </td>
+          </tr>
+          <!--Banking Details-->
+          <!--Contact Us-->
+          <tr>
+            <td colspan="1" style="text-align: center">
+              <span
+                >Our customer support line is available
+                <strong>24/7</strong></span
+              >
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1" style="text-align: center">
+              <span>Email: <strong>xcrossinglines@gmail.com</strong></span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1" style="text-align: center">
+              <span>WhatsApp: <strong>(+27) 72 516 7658</strong></span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1" style="text-align: center; padding-bottom: 1rem">
+              <span
+                >Call:
+                <strong>(+27) 72 516 7658 or (+27) 81 816 6146</strong></span
+              >
+            </td>
+          </tr>
+          <!--Contact Us-->
+        </tbody>
+        <!-- job introduction-->
+        <tfoot>
+          <tr>
+            <td colspan="1">Kind regards</td>
+          </tr>
+          <tr>
+            <td colspan="1">XCrossing Lines administration</td>
+          </tr>
+        </tfoot>
+        <!--Footer-->
+      </table>
+      <!--Table-->
+    </div>
+    <!-- job introduction-->
+  </body>
+</html>

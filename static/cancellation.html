@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Cancellation</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+
+        /*variables*/
+        --main-bg-color: #e0e0e09d;
+        --primary-color: #73c2fb;
+        --secondary-color: #272460;
+      }
+
+      header {
+        /* properties */
+        width: 100%;
+        background-color: var(--primary-color);
+        padding: 2rem 1rem;
+        color: #fff;
+        font-size: larger;
+      }
+
+      .job__greetings {
+        display: flex;
+        gap: 0.675rem;
+        flex-direction: column;
+        align-items: start;
+        margin-bottom: 2rem;
+      }
+
+      .job__body {
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        padding: 1rem;
+        background-color: var(--main-bg-color);
+      }
+
+      .contact__us {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 0.3rem;
+      }
+
+      .closing__footer {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      .invoice__item {
+        text-decoration: none;
+        font-weight: bold;
+        color: var(--primary-color);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- account notification header -->
+    <header>Job cancellation notification</header>
+    <!-- account notification header -->
+    <!-- job notification body -->
+    <div class="job__body">
+      <!-- job introduction-->
+      <div class="job__greetings">
+        <span>Hello Admin</span>
+        <span>
+          Job <a class="invoice__item" href="#/">Invoice 255</a> has been
+          cancelled.
+        </span>
+      </div>
+      <!-- job introduction-->
+      <!-- job contact us-->
+      <div class="contact__us">
+        <span>Our customer support line is available 24/7</span>
+        <span>Email: <span>xcrossinglines@gmail.com</span></span>
+        <span>WhatsApp: 0844394032</span>
+        <span>Call: 0844394032</span>
+      </div>
+      <!-- job contact us-->
+      <!-- job Closing-->
+      <div class="closing__footer">
+        <span>Kind Regards</span>
+        <span>XCrossing Lines administration.</span>
+      </div>
+      <!-- job Closing-->
+    </div>
+    <!-- job notification body -->
+  </body>
+</html>
