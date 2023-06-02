@@ -124,9 +124,7 @@ DATABASES = {
         'PORT': '5432'
     }
 }
-
 # .... 
-
 
 
 REST_FRAMEWORK = {
