@@ -35,7 +35,7 @@ SECRET_KEY = config("SECRET_KEY", cast=str)
 # config("DEBUG", cast=bool, default=True)
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost:8000", "127.0.0.1:8000", "https://xcrossinglines.herokuapp.com/"]
+ALLOWED_HOSTS = ["localhost:8000", "127.0.0.1:8000", "https://xcrossinglines-transport.herokuapp.com/"]
 
 
 # Application definition
@@ -106,24 +106,24 @@ AUTH_USER_MODEL = "accounts.Account"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
-# .. postgress database
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('NAME', cast=str),
-        'USER': config('USER', cast=str),
-        'PASSWORD': config('PASSWORD', cast=str),
-        'HOST': config('HOST', cast=str),
-        'PORT': '5432'
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# .. postgress database
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('NAME', cast=str),
+#         'USER': config('USER', cast=str),
+#         'PASSWORD': config('PASSWORD', cast=str),
+#         'HOST': config('HOST', cast=str),
+#         'PORT': '5432'
+#     }
+# }
 # .... 
 
 
@@ -169,14 +169,14 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https://\w+\xcrossinglines.herokuapp\.com$",
+    r"^https://\w+\xcrossinglines-transport.herokuapp\.com$",
 ]
 
 
 # ... 
 CORS_ALLOWED_ORIGINS = ["http://localhost:8000",
                         "http://127.0.0.1:8000",
-                        "https://xcrossinglines.herokuapp.com",
+                        "https://xcrossinglines-transport.herokuapp.com",
                           ]
 
 # "https://unmoverstransport.herokuapp.com" => include ^ up here 

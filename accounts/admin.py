@@ -8,14 +8,14 @@ from .models import Account, AccountProfile
 # customize the admin panel
 class UserAdminConfig(UserAdmin):
     
-    # readonly_fields = ('email', 'f_name', 's_name', )
+    readonly_fields = ('email', 'f_name', 's_name', 'm_number',)
     
-    search_fields = ('email',
-                     'f_name')
+    search_fields = ('id',
+                    'email',
+                    'f_name')
     
     list_filter = ('email',
                    'f_name',
-                   's_name',
                    'is_active')
     ordering = ('-d_joined', )
     
@@ -40,8 +40,8 @@ class UserAdminConfig(UserAdmin):
                                     'customer',
                                     'driver',)}),
         
-#('Personal', {'fields': ('pdf_id_copy',
-#                                 'pdf_drivers_license_copy',)})
+        #('Personal', {'fields': ('pdf_id_copy',
+        #                                 'pdf_drivers_license_copy',)})
     )
     
     # check new
@@ -64,7 +64,7 @@ class UserAdminConfig(UserAdmin):
 class AccountProfileAdminConfig(admin.ModelAdmin):
      
     readonly_fields = ('use_crossing_lines_for',
-                                'id_number', 'account', )
+                        'id_number', 'account', 'referal_code',)
     
     search_fields = ('id_number',
                      'id',

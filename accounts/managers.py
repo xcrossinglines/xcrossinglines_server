@@ -10,7 +10,7 @@ class AccountManager(BaseUserManager):
     
     def create_user(self, email, f_name, 
                         s_name, password, 
-                                        **other_fields):
+                            **other_fields):
         
         #//create check email
         if not email:
@@ -56,8 +56,8 @@ class AccountManager(BaseUserManager):
         
         # create user 
         account = self.create_user(email, f_name, 
-                                        s_name, password,
-                                                **other_fields)
+                                s_name, password,
+                                **other_fields)
         
         #// return 
         return account

@@ -17,15 +17,11 @@ class Route(models.Model):
     # date fields 
     created_at = models.DateTimeField(auto_now_add= True)
 
-
     # overide the string method 
     def __str__(self):
         return '(Route: ||{0}||-{1})'.format(self.id, self.route_name)
       
 
-
-    
-    
 # .. create Job Model 
 class Job(models.Model):
 
@@ -34,15 +30,12 @@ class Job(models.Model):
     YES = True
 
     # .. 
-    YES_NO_CHOICES = (
-        (NO, "No"),
-        (YES, "Yes")
-    )
+    YES_NO_CHOICES = [(NO, "No"), (YES, "Yes")]
     
     # set 
     VSIZECHOICES = [(1.0, "1.0 Ton"), (1.5, "1.5 Ton"), 
                     (4.0, "4.0 Ton"), (8.0, "8.0 Ton")]
-    
+    PAYMENTOPTIONS = [("EFT", "EFT"), ("CASH", "CASH")]
     FLOORSCHOICES = [(f, f) for f in range(11)]
     SHUTTLECHOICES = [(s, s) for s in range(3)]
     HELPERCHOICES = [(h + 1, h + 1) for h in range(3)]
@@ -80,7 +73,7 @@ class Job(models.Model):
                                      null = True, 
                                      blank = True)
     
-    payment_option = models.CharField(default = 'CASH', max_length = 50, null=True, blank=True)
+    payment_option = models.CharField(default = 'CASH', choices=PAYMENTOPTIONS, max_length = 50, null=True, blank=True)
     driver_note = models.TextField(default= 'No note left', max_length = 1000, null = True, blank = True)
     hear_about_us = models.CharField(default= 'GUMTREE', max_length = 100, null = True, blank = True, choices=HEARABOUTUS)
     # ... customer feed back 
