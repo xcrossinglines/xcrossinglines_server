@@ -37,6 +37,7 @@ class UserAdminConfig(UserAdmin):
                                     'is_active',
                                     'verified',
                                     'is_superuser',
+                                    'is_corperate',
                                     'customer',
                                     'driver',)}),
         
@@ -55,7 +56,8 @@ class UserAdminConfig(UserAdmin):
                        'password2',
                         'is_active',
                         'is_staff',
-                        'verified'),
+                        'verified', 
+                        'is_corperate'),
         }),
     )
     

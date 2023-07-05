@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     "referals.apps.ReferalsConfig",
     "FAQs.apps.FaqsConfig",
     "testimonials.apps.TestimonialsConfig",
+    "appconfig.apps.AppconfigConfig",
     # "gallery.apps.GalleryConfig",
     
 ]
@@ -106,26 +107,25 @@ AUTH_USER_MODEL = "accounts.Account"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
-# .. postgress database
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': config('NAME', cast=str),
-#         'USER': config('USER', cast=str),
-#         'PASSWORD': config('PASSWORD', cast=str),
-#         'HOST': config('HOST', cast=str),
-#         'PORT': '5432'
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
-# .... 
 
+# .. postgress database
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('NAME', cast=str),
+        'USER': config('USER', cast=str),
+        'PASSWORD': config('PASSWORD', cast=str),
+        'HOST': config('HOST', cast=str),
+        'PORT': '5432'
+    }
+}
+# .... 
 
 REST_FRAMEWORK = {
     

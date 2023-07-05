@@ -13,11 +13,13 @@ class JobAdminConfig(admin.ModelAdmin):
                     'customer', 
                     'driver_note', 
                     'job_canceled',
+                    'job_invoice_sent',
                     'referal_discount',
                     'referal_code',
                     'quote',
                     'amount_due',
                     'middle_month_discount',
+                    'return_customer_discount', 
                     'distance',
                     'payment_option',
                     'driver_note',
@@ -31,6 +33,7 @@ class JobAdminConfig(admin.ModelAdmin):
     ordering = ('-created_at', )
     
     list_filter =  ('job_completed',
+                    'job_out_sourced',
                     'job_canceled',
                     'vehicle_size',)
     

@@ -80,7 +80,7 @@ class Job(models.Model):
     service_rating = models.IntegerField(default = 0, blank = True)
     
     # ... referal code for discount 
-    referal_code = models.CharField(max_length=150, null=True, blank=True, default="") 
+    referal_code = models.CharField(max_length=150, null=True, blank=True, default="xcrossinglines") 
     referal_discount = models.FloatField(default = 0.0, 
                                             null = True, blank = True)
 
@@ -89,6 +89,10 @@ class Job(models.Model):
     amount_due = models.FloatField(default = 0.0, null = True, blank = True)
     middle_month_discount = models.FloatField(default = 0.0, null = True, blank = True)
     distance = models.FloatField(default = 0.0, null = True, blank = True)
+
+    # ... return customer 
+    return_customer_discount = models.FloatField(default = 0.0, 
+                                            null = True, blank = True)
     
     # ... 
     routes = models.ManyToManyField(Route, blank = True)
@@ -98,7 +102,15 @@ class Job(models.Model):
                                         choices=YES_NO_CHOICES, 
                                         null = False, blank=False)
     job_canceled = models.BooleanField(default=NO, 
-                                       choices=YES_NO_CHOICES, 
+                                       choices = YES_NO_CHOICES, 
+                                       null = False, blank=False)
+    
+    job_invoice_sent = models.BooleanField(default=NO, 
+                                       choices = YES_NO_CHOICES, 
+                                       null = False, blank=False)
+    
+    job_out_sourced = models.BooleanField(default=NO, 
+                                       choices = YES_NO_CHOICES, 
                                        null = False, blank=False)
     
     # .. date fields 

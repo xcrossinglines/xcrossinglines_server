@@ -23,7 +23,8 @@ class SignupSerializer(ModelSerializer):
                 'password', 
                 'customer', 
                 'driver', 
-                'is_staff',)
+                'is_staff',
+                'is_corperate',)
         extra_kwargs = {'password': {'write_only': True}}
         
     #// create password 
@@ -42,7 +43,6 @@ class AccountSerializer(ModelSerializer):
 
     #// serializers
     profile = SerializerMethodField(read_only = True)
-    account_complete = SerializerMethodField(read_only = True)
 
     # // meta
     class Meta: 
@@ -58,6 +58,7 @@ class AccountSerializer(ModelSerializer):
             "is_staff",
             "is_superuser",
             "customer",
+            "is_corperate",
             "driver",
             "verified",
             "d_joined",
@@ -66,7 +67,7 @@ class AccountSerializer(ModelSerializer):
             "groups",
             "user_permissions",
             "last_login",
-            "account_complete"
+       
         ]
 
     #//get full profile 
@@ -75,33 +76,6 @@ class AccountSerializer(ModelSerializer):
         sProfile = AccountProfileSerializer(getProfile)
         return sProfile.data
     
-    #//check account 
-    def get_account_complete(self, obj):
-
-        #..resolve to respective components
-        firstName = obj.f_name
-        surname = obj.s_name
-        mobileNumber = obj.m_number
-
-        # compaire
-        _noneType = type(None)
-        if(isinstance(firstName, _noneType) or 
-           isinstance(surname, _noneType) or 
-           isinstance(mobileNumber, _noneType)):
-            return False
-        
-        #// otherwise 
-        if(len(firstName) <= 0 or 
-           len(surname)<=0 or 
-           len(mobileNumber)<=0):
-            #// return 
-            return False 
-        
-        #// otherwise all is perfect
-        return True
-
-
-
         
         
 class AccountUpdateSerializer(ModelSerializer):
@@ -143,6 +117,7 @@ class SigninTokenObtainPairSerializer(TokenObtainPairSerializer):
         token["driver"] = account.driver
         token["is_staff"] = account.is_staff
         token["customer"] = account.customer
+        token["is_corperate"] = account.is_corperate
         # token['image'] = aProfile.image.url
     
         return token 

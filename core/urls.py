@@ -6,8 +6,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
 
-admin.site.site_title = "Crossing Lines"
-admin.site.site_header = "Crossing Lines Transport Services (Pty)Ltd"
+admin.site.site_title = "Xcrossinglines"
+admin.site.site_header = "Xcrossinglines Transport Services (Pty)Ltd"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -16,7 +16,8 @@ urlpatterns = [
     path("accounts/api/account/", include("accounts.urls")),
     path("jobs/api/", include("jobs.urls")),
     path("referals/api/", include("referals.urls")),
-    path("fqa/api/", include("FAQs.urls"))
+    path("fqa/api/", include("FAQs.urls")),
+    path("config/api/", include("appconfig.urls")),
   
 ]
 

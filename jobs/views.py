@@ -15,8 +15,8 @@ from .pagination import JobsPaginator
 
 # ... import models 
 from .models import Job, Route
-from referals.models import Referal
-from accounts.models import AccountProfile
+# from referals.models import Referal
+# from accounts.models import AccountProfile
 
 # ... utils 
 from .g_quote import GenerateQuote
@@ -199,7 +199,7 @@ class JobCustomerCreateAPIVIEW(generics.CreateAPIView):
         job_time = request.data.get("job_time")  # string 
         
         # ... for the refferals 
-        referal_code = request.data.get("referal_code")
+        # referal_code = request.data.get("referal_code")
         hear_about_us = request.data.get("hear_about_us")
 
         # # ... check which is null 
@@ -218,8 +218,7 @@ class JobCustomerCreateAPIVIEW(generics.CreateAPIView):
         if(helpers is None or floors is None 
                 or vehicle_size is None or payment_option is None 
                         or driver_note is None or distance is None or routes is None 
-                                or job_date is None or job_time is None or referal_code is None 
-                                    or hear_about_us is None):
+                                or job_date is None or job_time is None or hear_about_us is None):
  
             # ... set the payload 
             payload["msg"] = "Params cannot be null! Bad request 400."
@@ -343,13 +342,70 @@ class GenerateQuoteAPIVIEW(APIView):
     
     # .. add permissionis
     permission_classes = [AllowAny,]
+
+
+    # .. create function generate what we want 
+    def getUserType(self, cUser):
+
+        # payload 
+        payload = dict()
+        
+        # ... check if cUserExists 
+        if(isinstance(cUser, get_user_model())):
+
+            # .. set correct payload
+            payload["loggedin"] = True
+            payload["is_staff"] = cUser.is_staff
+
+            # .. return 
+            return payload
+            
+        # ... set default 
+        payload["loggedin"] = False 
+        payload["is_staff"] = False 
+
+        # return payload 
+        return payload 
     
+    #... apply return customer discount if customer is logged in 
+    def return_customer_discount(self, cUser, quote):
+
+        # ... zero discount
+        zero_discount = 0.0
+
+        # ... verify that customer is logged in 
+        if(isinstance(cUser, get_user_model())):
+
+            # ... verify that customer is cooperate 
+            if(cUser.is_corperate):
+                # .. continue 
+                customerJobs = Job.\
+                                objects.\
+                                    filter(customer = cUser)\
+                                        .order_by('-created_at')
+                
+                # ... customer job count 
+                customerJobCount = len(customerJobs)
+
+                # .. verify job count size
+                if(customerJobCount > 1): return quote*(5/100.0)
+
+                # ... else 
+                return zero_discount
+            # ... else
+            return zero_discount
+        # ... else 
+        return zero_discount
+
     # override post method 
     def post(self, request, *args, **kwargs):
         
         # .. define payload 
         payload = dict()
-        
+
+        # ... Noneable fields 
+        cUser = request.user
+
         # .. 
         floors = request.data.get("floors") # int 
         helpers = request.data.get("helpers")  # int 
@@ -377,18 +433,24 @@ class GenerateQuoteAPIVIEW(APIView):
                                   vSize = vehicle_size)
 
         # .. resolve 
-        jQuote, dPeak = jInstance.base_discounts
+        customerQuote, peakDiscount = jInstance.generate_quote_discount
+
+        # ... generate return customer discount if customer is logged in 
+        return_customer_d = self.return_customer_discount(cUser, customerQuote)
+
+        # ... generating current user details cDetails = Current User details 
+        userDetails = self.getUserType(cUser)
         
         # set set payload 
-        payload["quote"] = float("%.0f"%jQuote) 
-        payload["middle_month_discount"] = float("%.0f"%dPeak) 
-        payload["referal_discount"] = float("%.0f"%(0.0))
-        payload["amount_due"] = float("%.0f"%(jQuote - dPeak - 0.0))
+        payload["quote"] = float("%.0f"%round(customerQuote)) 
+        payload["middle_month_discount"] = float("%.0f"%round(peakDiscount)) 
+        payload["return_customer_discount"] = float("%.0f"%round(return_customer_d))
+        payload["amount_due"] = float("%.0f"%(customerQuote - peakDiscount - return_customer_d))
+        payload["user_details"] = userDetails
         
         # return 
         return Response(payload, status = status.HTTP_200_OK)
         
-    
 #// Generate Distance ApiView 
 class GenerateDistanceAPIVIEW(APIView):
     

@@ -1,5 +1,6 @@
 from django.db.models.signals import post_save, pre_delete, pre_save 
 from django.dispatch import receiver
+from rest_framework.authentication import get_user_model
 
 # ... 
         
@@ -9,9 +10,9 @@ from django.utils.html import strip_tags
 from django.conf import settings
 
 # ... import models 
-from .models import Job, Route
-from accounts.models import AccountProfile
-from referals.models import Referal
+from .models import Job #, Route
+# from accounts.models import AccountProfile
+# from referals.models import Referal
 # .. utils 
 from .g_quote import GenerateQuote
 
@@ -30,6 +31,7 @@ def created_job(sender, instance = None, created = False, **kwargs):
                  "quote": instance.quote,
                  "mDiscount": instance.middle_month_discount,
                  "rDiscount": instance.referal_discount,
+                 "rCustomer": instance.return_customer_discount,
                  "amountDue": instance.amount_due,
                  "paymentOption": instance.payment_option,
                  "cName": cName,
@@ -57,69 +59,6 @@ def created_job(sender, instance = None, created = False, **kwargs):
         sendEmail.fail_silently = True
         sendEmail.send()
 
-
-#  .. add refferal discount 
-def referalDiscount(instance, quote):
-
-    #... execute only when job is completed
-    if(instance.job_completed):
-        ## instance.referal_code 
-        # ... we need the current customer profile 
-        userProfile = AccountProfile\
-                        .objects\
-                        .filter(account = instance.customer)\
-                        .first()
-        # ... check instance correct 
-        if(isinstance(userProfile, AccountProfile)):
-            # ... check if referal code is the same
-            if(str(instance.referal_code) == str(userProfile.referal_code)):
-                return
-            # .. otherwise
-            referer = Referal\
-                        .objects\
-                        .filter(referal_code = instance.referal_code)\
-                        .first()
-            # ... check 
-            if(isinstance(referer, Referal)):
-                # .. credit with zaka 
-                referer.referal_discount += quote*(2/100.0)
-                referer.save()
-                return
-            
-#// generate customer referal discount 
-def applyCustomerReferalDiscount(instance):
-    # ... Account Profile
-    userProfile = AccountProfile\
-                    .objects\
-                    .filter(account = instance.customer)\
-                    .first()
-
-    # ... fetch referal
-    referer = Referal\
-                .objects\
-                .filter(referal_code = userProfile.referal_code)\
-                .first()
-    
-    # .. resolve and zero out
-    rDiscount = referer.referal_discount
-    referer.referal_discount = 0.0
-    referer.save()
-
-    # .. return 
-    return rDiscount
- 
-#//
-def verifyReferalCode(instance, quote):
-    # find referer 
-    referer = Referal\
-                .objects\
-                .filter(referal_code = instance.referal_code)\
-                .first()
-        # ... check 
-    if(isinstance(referer, Referal)): 
-        return quote*(102/100.0)
-    return quote
-
 # ... Job Cancellation
 def jobCancellation(instance):
 
@@ -132,24 +71,54 @@ def jobCancellation(instance):
         
         # ... template data tData = template Data
         templateData = {"id": instance.pk,
-                 "cName": cName,
-                 "jobLink": f"https://xcrossinglines.co.za/jobs/job/{instance.pk}/update"}
+                        "cName": cName,
+                        "jobLink": f"https://xcrossinglines.co.za/jobs/job/{instance.pk}/update"}
         
         # ... this is where I send the email
         htmlContent = render_to_string("cancelledJob.html", templateData)
         textContent = strip_tags(htmlContent)
 
-                #.. send email 
+        #.. send email 
         sendEmail = EmailMultiAlternatives(
                     f"XCROSSING LINES TRANSPORT PTY(LTD) JOB CANCELLATION",
                     textContent, 
                     settings.EMAIL_HOST_USER,
-                    ["u12318958@tuks.co.za", f"{instance.customer.email}", "xcrossinglines@gmail.com"]
-                )
+                    ["u12318958@tuks.co.za", 
+                     f"{instance.customer.email}", 
+                     "xcrossinglines@gmail.com"])
 
         sendEmail.attach_alternative(htmlContent, "text/html")  
         sendEmail.fail_silently = True
         sendEmail.send()
+
+# ... generate return customer discount 
+def generate_return_customer_discount(nQuote, cUser):
+
+    # ... zero
+    zero_discount = 0.0
+    
+    # .. verify that cUser is of type get_user_model
+    if(isinstance(cUser, get_user_model())):
+
+        # .. verify that the customer is corperate 
+        if(cUser.is_corperate):
+            # .. continue 
+            customerJobs = Job.\
+                            objects.\
+                                filter(customer = cUser)\
+                                    .order_by('-created_at')
+            
+            # count 
+            cJobCount = len(customerJobs)
+            # .. reffer
+            if(cJobCount > 1): return nQuote*(5/100.0)
+
+            # ... otherwise dont apply discount 
+            return zero_discount
+        
+        return zero_discount
+    # ... otherwise 
+    return zero_discount
  
 
 #  .. executed at the beginning
@@ -170,20 +139,17 @@ def before_saved(sender, instance, *args, **kwargs):
                                     vSize = instance.vehicle_size,
                                     job_date = instance.job_date)
         # .. generated quote 
-        _quote, dPeak = gQuoteClass.base_discounts
-        # ... 
-        referalDiscount(instance, _quote)
-        # .. 
-        nQuote = verifyReferalCode(instance, _quote)
-        # .. apply customer referal discount 
-        rDiscount = applyCustomerReferalDiscount(instance)
+        customerQuote, peakDiscount = gQuoteClass.generate_quote_discount
+    
+        # .. apply return customer discount 
+        rCustomerDiscount = generate_return_customer_discount(customerQuote, instance.customer)
 
         # .. set 
-        instance.quote = float("%.0f"%nQuote) 
-        instance.distance = float("%.0f"%dStance)
-        instance.referal_discount = float("%.0f"%rDiscount)
-        instance.middle_month_discount = float("%.0f"%dPeak)
-        instance.amount_due = float("%.0f"%(nQuote - rDiscount - dPeak)) 
+        instance.quote = float("%.0f"%round(customerQuote)) 
+        instance.distance = float("%.0f"%round(dStance))
+        instance.middle_month_discount = float("%.0f"%round(peakDiscount))
+        instance.return_customer_discount = float("%.0f"%round(rCustomerDiscount))
+        instance.amount_due = float("%.0f"%(customerQuote - peakDiscount - rCustomerDiscount)) 
         
         #...
         #... job cancellation 

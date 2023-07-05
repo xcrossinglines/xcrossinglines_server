@@ -8,7 +8,6 @@ class GenerateQuote:
         
         # .. discount 
         self.off_peak_discount = 10 # // percent 
-        self.on_peak_discount = 15 # percent 
         self.lDistance = 100 # kms
         self.tGateFee = 0.0
      
@@ -36,6 +35,8 @@ class GenerateQuote:
             8.0: [3450, 42.0*distance, 280*helpers, 160*floors, self.tGateFee]
         }\
         .get(float(vSize))
+
+    
         
     # ... check off peak 
     def __peak_discount(self, quote):
@@ -49,15 +50,14 @@ class GenerateQuote:
         if(_date.day not in self.peakDays):
             return quote*(self.off_peak_discount/100.0), True
         
-        # ... else just return 
-        return quote*(self.on_peak_discount/100.0), False 
+        # ... else dont apply any discounts 
+        return 0.0, False 
     
     # calculate quote 
     def __calculate_quote(self):
         
         # .. check distance to choose correct formular 
-        if(self.distance < self.lDistance): 
-            return sum(self.sDistanceParams)
+        if(self.distance < self.lDistance): return sum(self.sDistanceParams)
         
         # else long distance 
         return sum(self.lDistanceParams)
@@ -65,15 +65,14 @@ class GenerateQuote:
 
     # .. generate quote 
     @property
-    def base_discounts(self):
+    def generate_quote_discount(self):
 
         # ... generate 
         quote = self.__calculate_quote()
-        dPeak, apply = self.__peak_discount(quote)
+        dPeak, apply_peak_discount = self.__peak_discount(quote)
 
         # .. check
-        if(apply):
-            return quote, dPeak
+        if(apply_peak_discount): return (quote, dPeak)
 
         # ... else
-        return (quote + dPeak), 0
+        return (quote, 0.0)

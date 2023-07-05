@@ -9,6 +9,13 @@ from .managers import AccountManager
 
 #// account 
 class Account(AbstractBaseUser, PermissionsMixin):
+
+    # .. set boolean 
+    NO = False
+    YES = True
+
+    # .. 
+    YES_NO_CHOICES = [(NO, "No"), (YES, "Yes")]
     
     #// unique customer id
     id = models.AutoField(primary_key=True)
@@ -24,14 +31,16 @@ class Account(AbstractBaseUser, PermissionsMixin):
     d_updated = models.DateTimeField(auto_now=True)
     
     #// boolean fields 
-    is_active = models.BooleanField(default=True)
-    verified = models.BooleanField(default=True)
-    did_accept_ts_cs = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=YES, choices = YES_NO_CHOICES)
+    verified = models.BooleanField(default=YES, choices = YES_NO_CHOICES)
+    did_accept_ts_cs = models.BooleanField(default=YES, choices = YES_NO_CHOICES)
     
     #// determine whos registering 
-    is_staff = models.BooleanField(default=False)
-    customer = models.BooleanField(default=False)
-    driver = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=NO, choices = YES_NO_CHOICES)
+    is_corperate = models.BooleanField(default=NO, choices = YES_NO_CHOICES)
+    customer = models.BooleanField(default=NO, choices = YES_NO_CHOICES)
+    driver = models.BooleanField(default=NO, choices = YES_NO_CHOICES)
+    
     
     
     #... set upfields 
