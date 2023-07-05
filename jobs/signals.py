@@ -30,7 +30,6 @@ def created_job(sender, instance = None, created = False, **kwargs):
         templateData = {"id": instance.pk,
                  "quote": instance.quote,
                  "mDiscount": instance.middle_month_discount,
-                 "rDiscount": instance.referal_discount,
                  "rCustomer": instance.return_customer_discount,
                  "amountDue": instance.amount_due,
                  "paymentOption": instance.payment_option,
