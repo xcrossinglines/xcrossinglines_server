@@ -119,6 +119,52 @@ def generate_return_customer_discount(nQuote, cUser):
     # ... otherwise 
     return zero_discount
  
+ # .. send email 
+def completed_job(instance):
+    
+    # .. first check if job complete 
+    if(instance.job_completed):
+        # .. check if feed back email was sent 
+        if(instance.feedback_email_sent):return
+        
+        # .. check if usermodel is correct 
+        if(isinstance(instance.account, get_user_model())):
+
+            # .. here we send email to customer and admin
+            # .. compute customer name cName = Customer Name
+            cName = f"{0} {1}".format(instance.customer.f_name, 
+                                    instance.customer.s_name)
+            
+            # ... template data tData = template Data
+            templateData = {"cName": cName,
+                            "feedbackLink": "https://xcrossinglines.co.za/feedback"}
+            
+            # ... this is where I send the email
+            htmlContent = render_to_string("feedback.html", templateData)
+            textContent = strip_tags(htmlContent)
+
+                    #.. send email 
+            sendEmail = EmailMultiAlternatives(
+                        f"XCROSSING LINES TRANSPORT PTY(LTD) FEED BACK REQUEST",
+                        textContent, 
+                        settings.EMAIL_HOST_USER,
+                        ["u12318958@tuks.co.za", 
+                        f"{instance.customer.email}",])
+            
+            # .. send 
+            sendEmail.attach_alternative(htmlContent, "text/html")  
+            sendEmail.fail_silently = True
+            sendEmail.send()
+            
+            # .. when done mark as sent
+            instance.feedback_email_sent = True
+            return # .. then break
+        
+        # .. cancel 
+        return
+    
+    # ... break 
+    return
 
 #  .. executed at the beginning
 #  .. of the save method
@@ -150,6 +196,8 @@ def before_saved(sender, instance, *args, **kwargs):
         instance.return_customer_discount = float("%.0f"%round(rCustomerDiscount))
         instance.amount_due = float("%.0f"%(customerQuote - peakDiscount - rCustomerDiscount)) 
         
+        # job completed 
+        completed_job(instance)
         #...
         #... job cancellation 
         jobCancellation(instance)

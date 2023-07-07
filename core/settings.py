@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     "FAQs.apps.FaqsConfig",
     "testimonials.apps.TestimonialsConfig",
     "appconfig.apps.AppconfigConfig",
+    "feedback.apps.FeedbackConfig",
     # "gallery.apps.GalleryConfig",
     
 ]

@@ -76,9 +76,7 @@ class Job(models.Model):
     payment_option = models.CharField(default = 'CASH', choices=PAYMENTOPTIONS, max_length = 50, null=True, blank=True)
     driver_note = models.TextField(default= 'No note left', max_length = 1000, null = True, blank = True)
     hear_about_us = models.CharField(default= 'GUMTREE', max_length = 100, null = True, blank = True, choices=HEARABOUTUS)
-    # ... customer feed back 
-    service_rating = models.IntegerField(default = 0, blank = True)
-    
+ 
     # ... referal code for discount 
     referal_code = models.CharField(max_length=150, null=True, blank=True, default="xcrossinglines") 
     referal_discount = models.FloatField(default = 0.0, 
@@ -106,6 +104,10 @@ class Job(models.Model):
                                        null = False, blank=False)
     
     job_invoice_sent = models.BooleanField(default=NO, 
+                                       choices = YES_NO_CHOICES, 
+                                       null = False, blank=False)
+    
+    feedback_email_sent = models.BooleanField(default=NO, 
                                        choices = YES_NO_CHOICES, 
                                        null = False, blank=False)
     

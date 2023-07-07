@@ -18,6 +18,7 @@ urlpatterns = [
     path("referals/api/", include("referals.urls")),
     path("fqa/api/", include("FAQs.urls")),
     path("config/api/", include("appconfig.urls")),
+    path("feedbacks/api/", include("feedback.urls")),
   
 ]
 

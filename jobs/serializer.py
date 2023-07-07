@@ -36,7 +36,6 @@ class JobsGetCustomerSerializer(ModelSerializer):
             "vehicle_size",
             "payment_option",
             "driver_note",
-            "service_rating",
             "quote",
             "middle_month_discount",
             "return_customer_discount",

@@ -9,24 +9,25 @@ from .models import Job, Route
 # customize the admin panel
 class JobAdminConfig(admin.ModelAdmin):
     
-    readonly_fields = ('routes', 
+    readonly_fields = (
                     'customer', 
-                    'driver_note', 
-                    'job_canceled',
-                    'job_invoice_sent',
-                    'referal_discount',
-                    'referal_code',
+                    'job_date',
+                    'job_time',
                     'quote',
                     'amount_due',
                     'middle_month_discount',
                     'return_customer_discount', 
-                    'distance',
+                    'referal_discount',
                     'payment_option',
+                    'routes', 
+                    'distance',
+                    'driver_note', 
+                    'job_canceled',
+                    'feedback_email_sent',
+                    'job_invoice_sent',
+                    'referal_code',
                     'driver_note',
-                    'hear_about_us',
-                    'service_rating',
-                    'job_date',
-                    'job_time',) 
+                    'hear_about_us',) 
       
     search_fields = ('id', 'pk',  )
 
