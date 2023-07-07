@@ -7,7 +7,7 @@ class GenerateQuote:
     def __init__(self, vSize, distance, helpers, floors, job_date):
         
         # .. discount 
-        self.off_peak_discount = 10 # // percent 
+        self.off_peak_discount = 5 # // percent 
         self.lDistance = 100 # kms
         self.tGateFee = 0.0
      
