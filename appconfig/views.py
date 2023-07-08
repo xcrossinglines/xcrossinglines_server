@@ -74,14 +74,8 @@ class VerifyCompleteProfileView(APIView):
 
         # ... cUser 
         cUser = request.user
-
         # ... 
         payload = self.verifyCustomer(cUser)
-
-        print("")
-        print(cUser, "PAyload")
-        print("")
-
         # ... return 
         return Response(payload, status=status.HTTP_200_OK)
 

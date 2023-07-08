@@ -96,8 +96,6 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
         'email': reset_password_token.user.email,
         'reset_password_url': "https://xcrossinglines.co.za/password-reset/{0}".format(reset_password_token.key)
     }
-
-    print("THIS IS THE CONTEXT: ", templateData)
  
     # ... this is where I send the email
     htmlContent = render_to_string("resetPassword.html", templateData)
