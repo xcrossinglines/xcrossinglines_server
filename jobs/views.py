@@ -30,8 +30,7 @@ from .serializer import (JobsGetCustomerSerializer,
 import googlemaps
 
 
-# ... 
-# ... 
+
 # ... retrieve/Get ALL Customer Jobs 
 class JobsGETALLCustomerListAPIVIEW(generics.ListAPIView):
     
@@ -282,8 +281,7 @@ class JobCustomerUpdateAPIVIEW(generics.UpdateAPIView):
                         route_name = a["route_name"], 
                         lat = a["lat"], 
                         lng = a["lng"]) 
-                        # /// forloop 
-                        for a in routes]
+                            for a in routes]
         # .. return 
         return True, jRoutes
 
@@ -388,7 +386,7 @@ class GenerateQuoteAPIVIEW(APIView):
                 customerJobCount = len(customerJobs)
 
                 # .. verify job count size
-                if(customerJobCount > 1): return quote*(5/100.0)
+                if(customerJobCount >= 1): return quote*(5/100.0)
 
                 # ... else 
                 return zero_discount
@@ -409,34 +407,38 @@ class GenerateQuoteAPIVIEW(APIView):
         # .. 
         floors = request.data.get("floors") # int 
         helpers = request.data.get("helpers")  # int 
+        shuttle = request.data.get("shuttle") # int 
         vehicle_size = request.data.get("vehicle_size") # float 
         distance = request.data.get("distance") # float 
         job_date = request.data.get("job_date")  # string 
    
         # .. verify exists 
-        if(floors is None or helpers is None 
-           or vehicle_size is None 
-                or distance is None 
-                    or job_date is None):
+        if(floors is None 
+            or helpers is None 
+                or vehicle_size is None 
+                        or distance is None 
+                            or job_date is None 
+                                or shuttle is None):
             
             # // set payload 
-            payload["msg"] = "floors|helpers|vSize|distance and date cannot be null"
+            payload["msg"] = "floors|helpers|vSize|distance|shuttle and date cannot be null"
             
             # //send response 
             return Response(payload, status= status.HTTP_400_BAD_REQUEST)
         
         # .. generate quote 
         jInstance = GenerateQuote(job_date = job_date,
-                                  distance = float("%.0f"%distance),
+                                  distance = float("%.0f"%round(distance)),
                                   floors = floors,
                                   helpers = helpers,
-                                  vSize = vehicle_size)
+                                  vSize = vehicle_size,
+                                  shuttle= shuttle)
 
         # .. resolve 
         customerQuote, peakDiscount = jInstance.generate_quote_discount
 
         # ... generate return customer discount if customer is logged in 
-        return_customer_d = self.return_customer_discount(cUser, customerQuote)
+        return_customer_d = self.return_customer_discount(cUser, (customerQuote-peakDiscount))
 
         # ... generating current user details cDetails = Current User details 
         userDetails = self.getUserType(cUser)

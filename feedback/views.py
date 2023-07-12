@@ -1,13 +1,18 @@
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import generics 
 from rest_framework import status
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 # ... models 
 from .models import FeedBack
 
 # ... serializers 
 from .serializers import FeedBackSerializer
+
+# ... paginator
+from .feedbackPagination import FeedbackPaginator
 
 # ... create view 
 class CreateFeedBackAPIVIEW(APIView):
@@ -50,3 +55,17 @@ class CreateFeedBackAPIVIEW(APIView):
         # ... otherwise error 
         payload["msg"] = feedbackSerializer.errors
         return Response(payload, status=status.HTTP_400_BAD_REQUEST)
+    
+# ... fetch testimonials 
+class GetFeedBackAPIVIEW(generics.ListAPIView):
+
+    # ... 
+    queryset = FeedBack\
+                .objects\
+                .all()\
+                .order_by("-created_at")
+    
+    serializer_class = FeedBackSerializer
+    pagination_class = FeedbackPaginator
+    permission_classes = [AllowAny,]
+

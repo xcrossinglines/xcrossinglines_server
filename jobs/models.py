@@ -25,7 +25,7 @@ class Route(models.Model):
 # .. create Job Model 
 class Job(models.Model):
 
-    # .. set boolean 
+    # .. set variables
     NO = False
     YES = True
 
@@ -37,7 +37,7 @@ class Job(models.Model):
                     (4.0, "4.0 Ton"), (8.0, "8.0 Ton")]
     PAYMENTOPTIONS = [("EFT", "EFT"), ("CASH", "CASH")]
     FLOORSCHOICES = [(f, f) for f in range(11)]
-    SHUTTLECHOICES = [(s, s) for s in range(3)]
+    SHUTTLECHOICES = [(s,  ["None", "Pick up", "Drop off", "both"][s]) for s in range(4)]
     HELPERCHOICES = [(h + 1, h + 1) for h in range(3)]
     HEARABOUTUS = [("Facebook", "Facebook"), ("Gumtree", "Gumtree"), ("Referral", "Referral")]
     
@@ -65,6 +65,11 @@ class Job(models.Model):
     
     floors = models.IntegerField(default = 0, 
                                  choices=FLOORSCHOICES,
+                                 null = True, 
+                                 blank = True)
+
+    shuttle = models.IntegerField(default = 0, 
+                                 choices=SHUTTLECHOICES,
                                  null = True, 
                                  blank = True)
 
@@ -112,6 +117,10 @@ class Job(models.Model):
                                        null = False, blank=False)
     
     job_out_sourced = models.BooleanField(default=NO, 
+                                       choices = YES_NO_CHOICES, 
+                                       null = False, blank=False)
+    
+    give_extra_discount = models.BooleanField(default=NO, 
                                        choices = YES_NO_CHOICES, 
                                        null = False, blank=False)
     
