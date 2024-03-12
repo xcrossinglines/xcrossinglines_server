@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xcrossing Lines New Job</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+
+        /* font-family: "Nunito", sans-serif; */
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+
+        /*variables*/
+        --main-bg-color: #e0e0e09d;
+        --primary-color: #73c2fb;
+        --secondary-color: #272460;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- job notification header -->
+    <header
+      style="
+        font-size: xx-large;
+        background-color: #272460;
+        color: #ffffff;
+        padding: 2rem 1rem;
+        width: 100%;
+      "
+    >
+      <strong>Thank</strong> you for booking with Xcrossing Lines transport
+      services.
+    </header>
+    <!-- job notification header -->
+    <!-- job introduction-->
+    <div
+      style="
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
+        background-color: #e0e0e09d;
+      "
+    >
+      <!--Table-->
+      <table style="width: 100%">
+        <!--Reference -->
+        <thead>
+          <tr>
+            <td
+              colspan=""
+              style="
+                padding-bottom: 1rem;
+                background-color: transparent;
+                font-weight: bold;
+                font-size: 1rem;
+                text-align: end;
+              "
+            >
+              <span
+                >Job Reference:
+
+                <a
+                  href="{{jobLink}}"
+                  target="_blank"
+                  rel="noreferrer"
+                  style="
+                    text-decoration: none;
+                    color: #73c2fb;
+                    font-weight: bold;
+                  "
+                  >Invoice {{id}}</a
+                >
+              </span>
+            </td>
+          </tr>
+        </thead>
+        <!--Reference -->
+        <!-- job introduction-->
+        <tbody>
+          <!-- job Greeting-->
+          <tr>
+            <td>Hello <strong>{{cName}}</strong></td>
+          </tr>
+          <tr>
+            <td style="padding-bottom: 1rem">
+              <span
+                >We appreciate you selecting Xcrossinglines as your go-to
+                services provider. Please be aware that our driver will get in
+                touch with you one hour before your job time.
+              </span>
+            </td>
+          </tr>
+          <!-- job Greeting-->
+          <!-- job Details-->
+          <tr style="background-color: #ffffff">
+            <td colspan="2" style="padding: 1rem; width: 100%">
+              <table style="width: 100%">
+                <tr>
+                  <td colspan="1" style="color: #000">Date</td>
+                  <td colspan="1" style="text-align: end">{{date}}</td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="color: #000">Time</td>
+                  <td colspan="1" style="text-align: end">{{time}}</td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="color: #000">Number of Helpers</td>
+                  <td colspan="1" style="text-align: end">{{helpers}}</td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="color: #000">Number of Floors</td>
+                  <td colspan="1" style="text-align: end">{{floors}}</td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="color: #000">Distance</td>
+                  <td colspan="1" style="text-align: end">{{distance}} km</td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="color: #000">Vehicle size</td>
+                  <td colspan="1" style="text-align: end">{{vSize}} ton</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- job Details-->
+          <!-- Job Invoice-->
+          <tr style="background-color: #ffffff">
+            <td colspan="2" style="padding: 1rem; width: 100%">
+              <table style="width: 100%">
+                <tr>
+                  <td colspan="1" style="color: #000">Base fee</td>
+                  <td colspan="1" style="text-align: end">R {{quote}}</td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="color: #000">Off peak</td>
+                  <td colspan="1" style="text-align: end; color: red">
+                    - R {{mDiscount}}
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="color: #000">Return customer</td>
+                  <td colspan="1" style="text-align: end; color: red">
+                    - R {{rCustomer}}
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <hr
+                      color="#c9c9c9"
+                      style="height: 2px; padding: 0; margin: 8px 0px"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="font-weight: bold; color: #000">
+                    Amount due
+                  </td>
+                  <td
+                    colspan="1"
+                    style="
+                      text-align: end;
+                      font-size: 1.125rem;
+                      font-weight: bold;
+                    "
+                  >
+                    <span
+                      style="
+                        font-size: 0.75rem;
+                        font-weight: bold;
+                        text-align: center;
+                      "
+                      >{{paymentOption}}</span
+                    >
+                    R {{amountDue}}
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <hr
+                      color="#c9c9c9"
+                      style="height: 2px; padding: 0; margin: 8px 0px"
+                    />
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td
+              colspan="2"
+              style="
+                padding-top: 20px;
+                padding-bottom: 10px;
+                font-size: x-large;
+              "
+            >
+              Banking Details
+            </td>
+          </tr>
+          <!-- Job Invoice-->
+          <!--Banking Details-->
+          <tr style="background-color: white">
+            <td>
+              <table style="width: 100%; padding: 1rem">
+                <tr>
+                  <td colspan="1" style="font-weight: normal; color: black">
+                    Bank name
+                  </td>
+                  <td colspan="1" style="text-align: end; color: black">
+                    Capitec Bank
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="font-weight: normal; color: black">
+                    Account holder
+                  </td>
+                  <td colspan="1" style="text-align: end; color: black">
+                    Ms NM Msibi
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="font-weight: normal; color: black">
+                    Account type
+                  </td>
+                  <td colspan="1" style="text-align: end; color: black">
+                    Savings account
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="1" style="font-weight: normal; color: black">
+                    Account No.
+                  </td>
+                  <td colspan="1" style="text-align: end; color: black">
+                    1588362491
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!--Banking Details-->
+          <!--Contact Us-->
+          <tr>
+            <td style="text-align: center; padding-top: 50px">
+              <span
+                >Our customer support line is available
+                <strong>24/7</strong></span
+              >
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1" style="text-align: center">
+              <span>Email: <strong>xcrossinglines@gmail.com</strong></span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1" style="text-align: center">
+              <span>WhatsApp: <strong>(+27) 72 516 7658</strong></span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1" style="text-align: center; padding-bottom: 1rem">
+              <span
+                >Call:
+                <strong>(+27) 72 516 7658 or (+27) 81 816 6146</strong></span
+              >
+            </td>
+          </tr>
+          <!--Contact Us-->
+        </tbody>
+        <!-- job introduction-->
+        <tfoot>
+          <tr>
+            <td colspan="1">Kind regards</td>
+          </tr>
+          <tr>
+            <td colspan="1">Xcrossing Lines administration</td>
+          </tr>
+          <tr>
+            <td colspan="1">
+              <img
+                style="height: 20px"
+                src="https://storage.googleapis.com/unmovers_media/app-images/email_xlogo.png"
+                alt="logo"
+              />
+            </td>
+          </tr>
+        </tfoot>
+        <!--Footer-->
+      </table>
+      <!--Table-->
+    </div>
+    <!-- job introduction-->
+  </body>
+</html>
+
+<!-- https://storage.googleapis.com/unmovers_media/app-images/email_logo.png -->

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Cancellation</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+
+        /* font-family: "Nunito", sans-serif; */
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+
+        /*variables*/
+        --main-bg-color: #e0e0e09d;
+        --primary-color: #73c2fb;
+        --secondary-color: #272460;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- account notification style="width: 100%; background-color: #272460" header -->
+    <header
+      style="
+        font-size: xx-large;
+        background-color: #272460;
+        color: #ffffff;
+        padding: 2rem 1rem;
+        width: 100%;
+      "
+    >
+      <strong>Thank</strong> for using Xcrossing Lines transport services.
+      <strong>Job</strong> Feed Back Request
+    </header>
+    <!-- account notification header -->
+    <div
+      style="
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
+        background-color: #e0e0e09d;
+      "
+    >
+      <table style="width: 100%">
+        <!--Greetings-->
+        <thead>
+          <tr>
+            <td colspan="1" style="padding-bottom: 0.675rem">
+              <span style="font-size: 1rem"
+                >Hello <strong>{{cName}}</strong>
+              </span>
+            </td>
+          </tr>
+        </thead>
+        <!--Greetings-->
+        <!--Body-->
+        <tbody>
+          <tr>
+            <td style="padding-bottom: 2rem">
+              Thank you for using Xcrossing Lines as your services provider.
+              kindly access the feed back link to rate level of our service.
+              <a
+                href="{{feedbackLink}}"
+                style="color: #73c2fb; font-weight: bold"
+                >www.xcrossinglines.co.za/feedback</a
+              >
+              .
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1" style="text-align: center">
+              <span>Our customer support line is available 24/7</span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1" style="text-align: center">
+              <span>Email: xcrossinglines@gmail.com</span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1" style="text-align: center">
+              <span>WhatsApp: <strong>(+27) 72 516 7658</strong></span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1" style="text-align: center; padding-bottom: 2rem">
+              <span
+                >Call:
+                <strong>(+27) 72 516 7658 or (+27) 81 816 6146</strong></span
+              >
+            </td>
+          </tr>
+        </tbody>
+        <!--Body-->
+        <!--Footer-->
+        <tfoot>
+          <tr>
+            <td colspan="1">Kind regards</td>
+          </tr>
+          <tr>
+            <td colspan="1">Xcrossing Lines administration</td>
+          </tr>
+          <tr>
+            <td colspan="1">
+              <img
+                style="height: 20px"
+                src="https://storage.googleapis.com/unmovers_media/app-images/email_xlogo.png"
+                alt="logo"
+              />
+            </td>
+          </tr>
+        </tfoot>
+        <!--Footer-->
+      </table>
+    </div>
+  </body>
+</html>

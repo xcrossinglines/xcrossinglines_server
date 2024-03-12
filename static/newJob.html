@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xcrossing Lines New Job</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+
+        /*variables*/
+        --main-bg-color: #e0e0e09d;
+        --primary-color: #73c2fb;
+        --secondary-color: #272460;
+      }
+
+      header {
+        /* properties */
+        width: 100%;
+        background-color: var(--primary-color);
+        padding: 2rem 1rem;
+        color: #fff;
+        font-size: larger;
+      }
+
+      .job__body {
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--main-bg-color);
+      }
+
+      .job__reference {
+        width: 100%;
+        padding-bottom: 1rem;
+        background-color: transparent;
+        font-weight: bold;
+        font-size: 1rem;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+      .invoice__reference {
+        color: var(--secondary-color);
+      }
+
+      .job__greetings {
+        display: flex;
+        gap: 0.675rem;
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .job__invoice {
+        margin-top: 0.625rem;
+        margin-bottom: 0.625rem;
+        padding: 1rem;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .job__invoice__item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .contact__us {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 0.3rem;
+      }
+
+      .discount__item {
+        color: red;
+        font-weight: normal;
+      }
+
+      .trailing__amount__due {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 0.3rem;
+      }
+
+      .leading__item {
+        color: var(--secondary-color);
+        font-weight: bold;
+      }
+
+      .closing__footer {
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      .job__link {
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .job__details {
+        margin-top: 2rem;
+        gap: 0.3rem;
+        display: flex;
+        padding: 1rem;
+        flex-direction: column;
+        background-color: #fff;
+      }
+
+      .job__detail__item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .job__detail__leading {
+        font-weight: bold;
+        color: var(--secondary-color);
+      }
+
+      .job__detail__trailing {
+        font-weight: normal;
+      }
+
+      .banking__details {
+        margin-bottom: 2rem;
+        display: flex;
+        gap: 0.3rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      .banking__details__leading {
+        font-weight: bold;
+      }
+
+      .banking__details__trailing {
+        font-weight: normal;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--primary-color);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- job notification header -->
+    <header><strong>Thank</strong> you for booking with xcrossinglines</header>
+    <!-- job notification header -->
+    <!-- job notification body -->
+    <div class="job__body">
+      <!-- job reference-->
+      <div class="job__reference">
+        Job Reference: <span class="invoice__reference">Invoice-1233</span>
+      </div>
+      <!-- job reference-->
+      <!-- job introduction-->
+      <div class="job__introduction">
+        <div class="job__greetings">
+          <span>Hello Maera</span>
+          <span
+            >Thank you for booking with XCrossing Lines Transport. Our driver
+            will call you 1 hour prior, informing you that they are on their way
+            to make your job. Please contact admin for any queries.
+          </span>
+        </div>
+      </div>
+      <!-- job introduction-->
+      <!--Job Details-->
+      <div class="job__details">
+        <div class="job__detail__item">
+          <span class="job__detail__leading">Date</span
+          ><span class="job__detail__trailing">2023/04/05</span>
+        </div>
+        <div class="job__detail__item">
+          <span class="job__detail__leading">Time</span
+          ><span class="job__detail__trailing">15:30</span>
+        </div>
+        <div class="job__detail__item">
+          <span class="job__detail__leading">No. Helpers</span
+          ><span class="job__detail__trailing">1</span>
+        </div>
+        <div class="job__detail__item">
+          <span class="job__detail__leading">No. Floors</span
+          ><span class="job__detail__trailing">1</span>
+        </div>
+        <div class="job__detail__item">
+          <span class="job__detail__leading">Distance</span
+          ><span class="job__detail__trailing">1km</span>
+        </div>
+        <div class="job__detail__item">
+          <span class="job__detail__leading">Vehicle type</span
+          ><span class="job__detail__trailing">1 Ton</span>
+        </div>
+      </div>
+      <!--Job Details-->
+      <!-- job invoice-->
+      <div class="job__invoice">
+        <div class="job__invoice__item">
+          <span class="leading__item">Base fee</span> <span>R 2000</span>
+        </div>
+        <div class="job__invoice__item">
+          <span class="leading__item">Off peak</span>
+          <span class="discount__item">- R 2000</span>
+        </div>
+        <div class="job__invoice__item">
+          <span class="leading__item">Referal discount</span>
+          <span class="discount__item">- R 2000</span>
+        </div>
+        <hr color="grey" style="height: 2px; padding: 0px; margin: 0px" />
+        <div class="job__invoice__item">
+          <span class="leading__item">Amount due</span>
+          <div class="trailing__amount__due">
+            <span style="font-size: 0.625rem; font-weight: bold">CASH</span>
+            <span>R 2000</span>
+          </div>
+        </div>
+        <hr color="grey" style="height: 2px; padding: 0px; margin: 0px" />
+      </div>
+      <!-- job invoice-->
+      <!-- link to job -->
+      <div class="job__link">
+        <a href="#/">View complete job</a>
+      </div>
+      <!-- link to job -->
+      <!--Banking Details-->
+      <div class="banking__details">
+        <div>
+          <span class="banking__details__leading">Bank name: </span>
+          <span class="banking__details__trailing">Capitec Bank</span>
+        </div>
+        <div>
+          <span class="banking__details__leading">Account holder: </span>
+          <span class="banking__details__trailing">Ms NM Msibi</span>
+        </div>
+        <div>
+          <span class="banking__details__leading">Account type: </span>
+          <span class="banking__details__trailing">Savings account</span>
+        </div>
+        <div>
+          <span class="banking__details__leading">Account No.: </span>
+          <span class="banking__details__trailing">1588362491</span>
+        </div>
+      </div>
+      <!--Banking Details-->
+      <!-- job contact us-->
+      <div class="contact__us">
+        <span>Our customer support line is available 24/7</span>
+        <span>Email: <span>xcrossinglines@gmail.com</span></span>
+        <span>WhatsApp: 0844394032</span>
+        <span>Call: 0844394032</span>
+      </div>
+      <!-- job contact us-->
+      <!-- job Closing-->
+      <div class="closing__footer">
+        <span>Kind regards</span>
+        <span>XCrossing Lines administration.</span>
+      </div>
+      <!-- job Closing-->
+    </div>
+    <!-- job notification body -->
+  </body>
+</html>
