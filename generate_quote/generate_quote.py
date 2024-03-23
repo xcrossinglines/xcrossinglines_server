@@ -13,7 +13,7 @@ class GenerateQuote:
         self.tGateFee = 0.0
      
         # onpeak 
-        self.peakDays = [25, 26, 27, 28, 29, 30, 31, 1, 2, 3, 4, 5]
+        self.peakDays = [27, 28, 29, 30, 31, 1, 2, 3]
         self.date = job_date 
         self.distance = distance
 
@@ -85,7 +85,8 @@ class GenerateQuote:
         dPeak, apply_peak_discount = self.__peak_discount(quote)
 
         # .. check
-        if(apply_peak_discount): return (quote, dPeak)
+        if(apply_peak_discount):
+                return (quote, dPeak)
 
         # ... else
         return (quote, 0.0)

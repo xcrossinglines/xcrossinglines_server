@@ -18,6 +18,7 @@ SECRET_KEY = config("SECRET_KEY", cast=str)
 # SECURITY WARNING: don't run with debug turned on in production!
 # config("DEBUG", cast=bool, default=True)
 DEBUG = config("DEBUG", cast=bool, default=True)
+# DEBUG = True 
 
 # .. allowed hosts
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "https://xcrossinglines-transport.herokuapp.com"]
@@ -107,7 +108,9 @@ if(DEBUG):
     }
 else:
     DATABASES = {
-        'default': dj_database_url.config(default=config("DATABASE_URL", cast=str, default = ""))
+        'default': dj_database_url.\
+                    config(default=config("DATABASE_URL", 
+                                          cast=str, default = ""))
     }
     
 
