@@ -95,7 +95,7 @@ def job_invoice_issue(instance):
                 "floors": instance.floors,
                 "distance": instance.distance,
                 "vSize": instance.vehicle_size,
-                "jobLink": f"https://xcrossinglines.co.za/jobs/job/{instance.pk}/update"}
+                "jobLink": f"https://xlines.co.za/jobs/job/{instance.pk}/update"}
 
                 # ... this is where I send the email
     htmlContent = render_to_string("newJob.html", templateData)
@@ -106,7 +106,7 @@ def job_invoice_issue(instance):
                 f"XCROSSING LINES TRANSPORT PTY(LTD) JOB INVOICE {instance.pk}",
                 textContent, 
                 settings.EMAIL_HOST_USER,
-                ["u12318958@tuks.co.za", f"{instance.customer.email}", "xcrossinglines@gmail.com"]
+                [f"{instance.customer.email}", "xcrossinglines@gmail.com"]
             )
 
     sendEmail.attach_alternative(htmlContent, "text/html")  
@@ -133,7 +133,7 @@ def jobCancellation(instance):
         # ... template data tData = template Data
         templateData = {"id": instance.pk,
                         "cName": cName,
-                        "jobLink": f"https://xcrossinglines.co.za/jobs/job/{instance.pk}/update"}
+                        "jobLink": f"https://xlines.co.za/jobs/job/{instance.pk}/update"}
         
         # ... this is where I send the email
         htmlContent = render_to_string("cancelledJob.html", templateData)
@@ -144,8 +144,7 @@ def jobCancellation(instance):
                     f"XCROSSING LINES TRANSPORT PTY(LTD) JOB CANCELLATION",
                     textContent, 
                     settings.EMAIL_HOST_USER,
-                    ["u12318958@tuks.co.za", 
-                     f"{instance.customer.email}", 
+                    [f"{instance.customer.email}", 
                      "xcrossinglines@gmail.com"])
 
         sendEmail.attach_alternative(htmlContent, "text/html")  
@@ -201,7 +200,7 @@ def completed_job(instance):
                 
                 # ... template data tData = template Data
                 templateData = {"cName": cName,
-                                "feedbackLink": "https://xcrossinglines.co.za/feedback"}
+                                "feedbackLink": "https://xlines.co.za/feedback"}
                 
                 # ... this is where I send the email
                 htmlContent = render_to_string("feedback.html", templateData)
@@ -212,8 +211,7 @@ def completed_job(instance):
                             "XCROSSING LINES TRANSPORT PTY(LTD) FEED BACK REQUEST",
                             textContent, 
                             settings.EMAIL_HOST_USER,
-                            ["u12318958@tuks.co.za", 
-                            f"{instance.customer.email}",])
+                            [f"{instance.customer.email}"])
                 
                 # .. send 
                 sendEmail.attach_alternative(htmlContent, "text/html")  
