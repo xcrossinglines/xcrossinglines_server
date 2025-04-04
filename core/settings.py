@@ -172,12 +172,9 @@ SILENCED_SYSTEM_CHECKS = ["security.W019"]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]
-
-
 
 MEDIA_ROOT = "media/"
 MEDIA_URL = os.path.join(BASE_DIR, MEDIA_ROOT)
