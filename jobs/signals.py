@@ -35,13 +35,14 @@ def _date_past(instance):
 
     
 
-# update prices 
-def valid_update(instance):
-    # evaluate 
-    if(instance.job_completed or 
-                instance.job_canceled or 
-                        _date_past(instance)): return False
-    return True
+# # update prices 
+# def valid_update(instance):
+#     # evaluate 
+#     if(instance.job_completed or 
+#                 instance.job_canceled or 
+#                         _date_past(instance) or 
+#                           instance.job_completed): return False
+#     return True
 
 # generate extra given discount 
 def generate_extra_given_discount(instance, quote):
@@ -241,10 +242,8 @@ def created_job(sender, instance = None, created = False, **kwargs):
 #  .. of the save method
 @receiver(pre_save, sender = Job)
 def before_saved(sender, instance, *args, **kwargs):
-    # validate 
-    update = valid_update(instance)
-    # ... check correct instance
-    if(isinstance(instance, Job) and update):
+
+    if(isinstance(instance, Job)):
         
         # .. compute distance 
         dStance = float("%.0f"%round(instance.distance))
