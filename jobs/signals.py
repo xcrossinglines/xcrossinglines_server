@@ -184,6 +184,8 @@ def generate_return_customer_discount(new_quote, user_account):
  # .. send email 
 def completed_job(instance):
     
+    print(instance, isinstance(instance, Job))
+    print("IS Job created, ", instance.job_completed)
     # .. first check if job complete 
     if(isinstance(instance, Job)):
         # .. is job
