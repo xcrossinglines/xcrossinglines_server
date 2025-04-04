@@ -188,12 +188,8 @@ def completed_job(instance):
     if(isinstance(instance, Job)):
         # .. is job
         if(instance.job_completed):
-            # .. check if feed back email was sent 
-            if(instance.feedback_email_sent):return
             # .. check if usermodel is correct 
             if(isinstance(instance.customer, get_user_model())):
-
-                # .. here we send email to customer and admin
                 # .. compute customer name cName = Customer Name
                 cName = "{0} {1}".format(instance.customer.f_name, 
                                         instance.customer.s_name)
@@ -220,6 +216,7 @@ def completed_job(instance):
                 
                 # .. when done mark as sent
                 instance.feedback_email_sent = True
+                print("Are we even running this block of code 123211")
                 
                 return # .. then break
             # .. cancel 
@@ -283,7 +280,7 @@ def before_saved(sender, instance, *args, **kwargs):
                                             mid_discount - 
                                             rCustomerDiscount - 
                                             extra_discount_amount))) 
-        # #... 
+        #........... 
         job_invoice_issue(instance)
         completed_job(instance)
         jobCancellation(instance)
