@@ -1,0 +1,18 @@
+1. Logo URl << DONE 
+2. InvoiceID: invoiceID: CHECK << DONE 
+3. Billing To: Name and Surname: clientNameAndSurname CHECK << DONE 
+4. Cell Phone Number: clientPhoneNumber: CHECK << DONE 
+5. Email: clientEmail: CHECK << DONE
+6. Invoice Date: invoiceDate: CHECK << DONE
+7. Vehicle Type : vehicleType: CHECK << DONE
+8. Booking Date and Time: bookingDateTime: Check << DONE
+9. Routers: routes: CHECK << DONE 
+10. AmountDue:  amountDue: CHECK << DONE
+11. Distance: distance: CHECK << DONE 
+12. Helpers: helpers: Check << DONE 
+13. Floors: floors: CHECK << DONE 
+14. PaymentOption: paymentOption: CHECK 
+15. Discounts: totalDiscounts : CHECK << DONE 
+16. BaseFee: baseFee : CHECK << DONE 
+
+

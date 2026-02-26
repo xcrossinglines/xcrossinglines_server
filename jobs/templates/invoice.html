@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light only" />
+    <meta name="supported-color-schemes" content="light" />
+    <title>Invoice #846</title>
+
+    <style>
+      u + .body .email-container {
+        background-color: #ffffff !important;
+      }
+    </style>
+  </head>
+  <!-- style="background-color: #ffffff !important" -->
+  <body style="margin: 0; padding: 0; background-color: #f4f4f4">
+    <table
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      border="0"
+      bgcolor="#ffffff"
+      class="email-container"
+      style="
+        background: linear-gradient(#ffffff, #ffffff);
+        background-color: #ffffff;
+      "
+      bgcolor="#FFFFFF"
+    >
+      <tr>
+        <td align="center">
+          <table
+            width="600"
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            style="
+              background-color: #ffffff;
+              font-family: Arial, Helvetica, sans-serif;
+            "
+          >
+            <!-- HEADER WITH BRAND COLOR -->
+            <tr>
+              <td
+                style="
+                  background-color: #0d6efd;
+                  padding: 25px;
+                  text-align: center;
+                  color: #ffffff;
+                "
+              >
+                <img
+                  src="https://storage.googleapis.com/unmovers_media/app-images/email_xlogo.png"
+                  width="150"
+                  style="display: block; margin: 0 auto 10px auto"
+                  alt="XCROSSING LINES TRANSPORT Logo"
+                />
+
+                <h2 style="margin: 0; font-weight: normal">INVOICE</h2>
+                <p style="margin: 5px 0 0 0">Invoice #{{ invoiceID }}</p>
+              </td>
+            </tr>
+
+            <!-- COMPANY INFO -->
+            <tr>
+              <td
+                style="
+                  padding: 20px;
+                  font-size: 13px;
+                  color: #555555;
+                  text-align: center;
+                "
+              >
+                XCROSSING LINES TRANSPORT<br />
+                Springbok Avenue, Clayville East, Olifantsfontein, 1666<br />
+                Tel: 081 816 6146 | admin@xlines.co.za<br />
+                www.xlines.co.za
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border-top: 1px solid #dddddd"></td>
+            </tr>
+
+            <!-- BILL TO -->
+            <tr>
+              <td style="padding: 20px; font-size: 14px">
+                <table width="100%" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td>
+                      <strong>BILL TO:</strong><br />
+                      {{ clientNameAndSurname }}<br />
+                      {{ clientPhoneNumber }}<br />
+                      {{ clientEmail }}
+                    </td>
+
+                    <td align="right">
+                      <strong>Invoice Date:</strong> {{ invoiceDate }} <br />
+                      <strong>Booking Date and Time:</strong> {{ jobDateTime }}
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- SERVICES -->
+            <tr>
+              <td style="padding: 0 20px 20px 20px">
+                <table
+                  width="100%"
+                  cellpadding="10"
+                  cellspacing="0"
+                  border="1"
+                  style="border-collapse: collapse; font-size: 14px"
+                >
+                  <tr style="background-color: #f2f2f2">
+                    <th align="left">Description</th>
+                    <th align="right">Amount (ZAR)</th>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong
+                        >Vehicle Type – {{ vehicleType }} Ton Vehicle</strong
+                      ><br /><br />
+                      <strong>Distance – {{ distance }} km</strong><br /><br />
+                      <strong>Helpers – {{ helpers }}</strong><br /><br />
+                      <strong>Floors – {{ floors }}</strong><br /><br />
+
+                      <!-- Routes -->
+                      {% for route in routes %} {% if forloop.first %}
+                      <strong>Collection:</strong><br />
+                      {% elif forloop.last %}
+                      <strong>Delivery:</strong><br />
+                      {% else %}
+                      <strong>Collection/Delivery:</strong><br />
+                      {% endif %}
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query={{ route.route_name|urlencode }}"
+                        target="_blank"
+                        style="
+                          color: #0d6efd;
+                          font-weight: bold;
+                          text-decoration: none;
+                        "
+                      >
+                        {{ route.route_name }} </a
+                      ><br /><br />
+
+                      {% empty %}
+                      <strong>No routes assigned</strong><br />
+                      {% endfor %}
+                    </td>
+                    <td align="right">
+                      <span>R {{ baseFee }}</span> <br /><br />
+                      <span style="color: red">- R {{ totalDiscounts }}</span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td align="right" style="font-weight: bold">Total</td>
+                    <td align="right" style="font-weight: bold">
+                      ZAR {{ amountDue }}
+                      <span style="font-size: small"
+                        >({{ paymentOption }})</span
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- PAYMENT -->
+            <tr>
+              <td style="padding: 20px; font-size: 14px">
+                <strong>Payment Information</strong><br /><br />
+
+                EFT: Immediate payment must be made at the pick-up address.<br />
+                Cash: Payment to be made at drop-off address.<br /><br />
+
+                <strong>Banking Details:</strong><br />
+                Account Holder: XCROSSING LINES HOLDINGS<br />
+                Bank: Capitec Business<br />
+                Account Number: 1051978637<br />
+                Account Type: Current<br />
+                Branch Code: 450105
+              </td>
+            </tr>
+
+            <!-- FOOTER -->
+            <tr>
+              <td
+                style="
+                  background-color: #f8f8f8;
+                  padding: 20px;
+                  text-align: center;
+                  font-size: 12px;
+                  color: #888888;
+                "
+              >
+                Thank you for choosing XCROSSING LINES TRANSPORT.
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
