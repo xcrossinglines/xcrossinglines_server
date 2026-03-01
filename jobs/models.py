@@ -92,7 +92,7 @@ class Job(models.Model):
     feedback_email_sent = models.BooleanField(default=NO, choices = YES_NO_CHOICES, null = False, blank=False)
     job_out_sourced = models.BooleanField(default=NO, choices = YES_NO_CHOICES, null = False, blank=False)
     give_extra_discount = models.BooleanField(default=NO, choices = YES_NO_CHOICES, null = False, blank=False)
-    set_price_adjustment = models.BooleanField(default=NO, choices = YES_NO_CHOICES, null = False, blank=False)
+    set_price_adjustment = models.BooleanField(default=YES, choices = YES_NO_CHOICES, null = False, blank=False)
     
     # .. date fields 
     job_date = models.DateField(null = True)
