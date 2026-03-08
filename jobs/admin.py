@@ -19,14 +19,14 @@ class JobAdminForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             "job_time": forms.TimeInput(attrs={"type": "time"}, format="%H:%M"),
-            "price_adjustment": forms.TextInput(
-                attrs={
-                    "inputmode": "decimal",  # forces numeric keyboard with minus sign
-                    "pattern": "-?\\d+(\\.\\d+)?",  # allows optional leading minus and decimals
-                    "title": "Enter a number (negative allowed)",
-                    "placeholder": "e.g. -10.50",
-                }
-            ),
+            # "price_adjustment": forms.TextInput(
+            #     attrs={
+            #         "inputmode": "decimal",  # forces numeric keyboard with minus sign
+            #         "pattern": "-?\\d+(\\.\\d+)?",  # allows optional leading minus and decimals
+            #         "title": "Enter a number (negative allowed)",
+            #         "placeholder": "e.g. -10.50",
+            #     }
+            # ),
         }
 
     def __init__(self, *args, **kwargs):
@@ -37,6 +37,10 @@ class JobAdminForm(forms.ModelForm):
             "Enter the adjustment amount. Positive values <span style='color: green; font-weight: bold;'>Increase</span> the price, "
             "negative values <span style='color: red; font-weight: bold;'>Decrease</span> it. "
             '<a href="/help/#price-adjustment" target="_blank">Learn more</a>.'
+        )
+
+        self.fields["price_adjustment"].widget = forms.TextInput(
+            attrs={"inputmode": "decimal"}
         )
 
 
