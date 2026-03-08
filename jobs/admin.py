@@ -20,10 +20,14 @@ class JobAdminForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             "job_time": forms.TimeInput(attrs={"type": "time"}, format="%H:%M"),
-            "price_adjustment": DecimalWithSignInput(),
-            # "price_adjustment": forms.NumberInput(
-            #     attrs={"step": "0.01", "inputmode": "decimal"}
-            # ),
+            "price_adjustment": forms.TextInput(
+                attrs={
+                    "inputmode": "decimal",  # forces numeric keyboard with minus sign
+                    "pattern": "-?\\d+(\\.\\d+)?",  # allows optional leading minus and decimals
+                    "title": "Enter a number (negative allowed)",
+                    "placeholder": "e.g. -10.50",
+                }
+            ),
         }
 
     def __init__(self, *args, **kwargs):
