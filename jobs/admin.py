@@ -5,6 +5,9 @@ from django.utils.safestring import mark_safe
 from rest_framework.authentication import get_user_model
 from .models import Job, Route
 
+from django.db import models
+from django.forms import NumberInput
+
 # from django.contrib.admin.widgets import AdminTimeWidget
 from django import forms
 
@@ -15,7 +18,7 @@ class JobAdminForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             "job_time": forms.TimeInput(attrs={"type": "time"}, format="%H:%M"),
-            "price_adjustment": forms.TextInput(
+            "price_adjustment": forms.FloatField(
                 attrs={"inputmode": "decimal", "pattern": "[-+]?[0-9]*[.,]?[0-9]+"}
             ),
         }
@@ -35,6 +38,10 @@ class JobAdminForm(forms.ModelForm):
 class JobAdminConfig(admin.ModelAdmin):
 
     form = JobAdminForm
+
+    formfield_overrides = {
+        models.FloatField: {"widget": NumberInput(attrs={"step": "any"})},
+    }
 
     readonly_fields = (
         "customer",
