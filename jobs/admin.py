@@ -33,11 +33,36 @@ class JobAdminForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         # Add HTML help text to the field
         self.fields["price_adjustment"].help_text = mark_safe(
-            '<span style="color: #2e6da4; font-weight: bold;">Note:</span> '
-            "Enter the adjustment amount. Positive values <span style='color: green; font-weight: bold;'>Increase</span> the price, "
-            "negative values <span style='color: red; font-weight: bold;'>Decrease</span> it. "
-            '<a href="/help/#price-adjustment" target="_blank">Learn more</a>.'
+            '<div style="color: #2e6da4; font-weight: bold;">Note:</div>'
+            "<div>Enter the adjustment amount. Positive values "
+            '<span style="color: green; font-weight: bold;">Increase</span> the price, '
+            'negative values <span style="color: red; font-weight: bold;">Decrease</span> it. '
+            '<a href="/help/#price-adjustment" target="_blank">Learn more</a>.</div>'
+            '<div style="margin-top: 8px;">'
+            '<button type="button" '
+            "onclick=\"var f=document.getElementById('id_price_adjustment'); "
+            "if(f.value.charAt(0) === '-'){f.value=f.value.slice(1);}else{f.value='-'+f.value;}\" "
+            'style="background-color: #2e6da4; color: white; font-weight: bold; border: none; '
+            'border-radius: 4px; padding: 4px 10px; cursor: pointer; margin-right: 5px;">'
+            "Add/Subtract</button>"
+            "</div>"
         )
+        # self.fields["price_adjustment"].help_text = mark_safe(
+        #     '<span style="color: #2e6da4; font-weight: bold;">Note:</span> '
+        #     'Enter the adjustment amount. Positive values <span style="color: green; font-weight: bold;">Increase</span> the price, '
+        #     'negative values <span style="color: red; font-weight: bold;">Decrease</span> it. '
+        #     '<a href="/help/#price-adjustment" target="_blank">Learn more</a>. '
+        #     '<div style="margin-top: 5px;">'
+        #     '<button type="button" style="margin-right:5px;" '
+        #     "onclick=\"var f=document.getElementById('id_price_adjustment'); "
+        #     "if(f.value.charAt(0) === '-'){f.value=f.value.slice(1);}else{f.value='-'+f.value;}\">Add or Subtract</button>"
+        # )
+        # self.fields["price_adjustment"].help_text = mark_safe(
+        #     '<span style="color: #2e6da4; font-weight: bold;">Note:</span> '
+        #     "Enter the adjustment amount. Positive values <span style='color: green; font-weight: bold;'>Increase</span> the price, "
+        #     "negative values <span style='color: red; font-weight: bold;'>Decrease</span> it. "
+        #     '<a href="/help/#price-adjustment" target="_blank">Learn more</a>.'
+        # )
 
         self.fields["price_adjustment"].widget = forms.TextInput(
             attrs={"inputmode": "decimal"}
