@@ -15,13 +15,19 @@ class JobAdminForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             "job_time": forms.TimeInput(attrs={"type": "time"}, format="%H:%M"),
+            "price_adjustment": forms.NumberInput(
+                attrs={
+                    "step": "0.01",
+                    "min": "-10000000",
+                }
+            ),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Add HTML help text to the field
         self.fields["price_adjustment"].help_text = mark_safe(
-            '<span style="color: #2e6da4; font-weight: bold;">ℹ️ Note:</span> '
+            '<span style="color: #2e6da4; font-weight: bold;">Note:</span> '
             "Enter the adjustment amount. Positive values <span style='color: green; font-weight: bold;'>Increase</span> the price, "
             "negative values <span style='color: red; font-weight: bold;'>Decrease</span> it. "
             '<a href="/help/#price-adjustment" target="_blank">Learn more</a>.'
