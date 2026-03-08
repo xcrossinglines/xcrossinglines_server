@@ -15,11 +15,8 @@ class JobAdminForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             "job_time": forms.TimeInput(attrs={"type": "time"}, format="%H:%M"),
-            "price_adjustment": forms.NumberInput(
-                attrs={
-                    "step": "0.01",
-                    "min": "-10000000",
-                }
+            "price_adjustment": forms.TextInput(
+                attrs={"inputmode": "decimal", "pattern": "[-+]?[0-9]*[.,]?[0-9]+"}
             ),
         }
 
