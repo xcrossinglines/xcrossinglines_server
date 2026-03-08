@@ -3,6 +3,8 @@ from django.utils.safestring import mark_safe
 
 # .. models
 from rest_framework.authentication import get_user_model
+
+from jobs.widget import DecimalWithSignInput
 from .models import Job, Route
 
 from django.db import models
@@ -18,9 +20,10 @@ class JobAdminForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             "job_time": forms.TimeInput(attrs={"type": "time"}, format="%H:%M"),
-            "price_adjustment": forms.NumberInput(
-                attrs={"step": "0.01", "inputmode": "decimal"}
-            ),
+            "price_adjustment": DecimalWithSignInput(),
+            # "price_adjustment": forms.NumberInput(
+            #     attrs={"step": "0.01", "inputmode": "decimal"}
+            # ),
         }
 
     def __init__(self, *args, **kwargs):
@@ -39,9 +42,9 @@ class JobAdminConfig(admin.ModelAdmin):
 
     form = JobAdminForm
 
-    formfield_overrides = {
-        models.FloatField: {"widget": NumberInput(attrs={"step": "any"})},
-    }
+    # formfield_overrides = {
+    #     models.FloatField: {"widget": NumberInput(attrs={"step": "any"})},
+    # }
 
     readonly_fields = (
         "customer",
