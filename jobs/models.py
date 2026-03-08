@@ -118,8 +118,8 @@ class Job(models.Model):
     distance = models.FloatField(default=0.0, null=True, blank=True)
     extra_discount = models.FloatField(default=0.0, null=True, blank=True)
     extra_discount_pecentage = models.FloatField(default=0.0, null=False, blank=False)
-    price_adjustment = models.FloatField(
-        default=0.0,
+    price_adjustment = models.TextField(
+        default="0.0",
         null=False,
         blank=False,
         help_text="This is the amount that will be added or subtracted from the base fee. Use negative values for discounts and positive values for surcharges.",

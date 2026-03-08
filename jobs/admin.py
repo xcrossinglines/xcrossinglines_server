@@ -4,7 +4,6 @@ from django.utils.safestring import mark_safe
 # .. models
 from rest_framework.authentication import get_user_model
 
-from jobs.widget import DecimalWithSignInput
 from .models import Job, Route
 
 from django.db import models
