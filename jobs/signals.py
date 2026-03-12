@@ -20,19 +20,19 @@ from datetime import datetime
 
 
 # invalid changes
-def _date_past(instance):
-    # ....
-    date = "{0} {1}".format(
-        instance.job_date, instance.job_time
-    )  # string respresentation
+# def _date_past(instance):
+#     # ....
+#     date = "{0} {1}".format(
+#         instance.job_date, instance.job_time
+#     )  # string respresentation
 
-    # .. epocs
-    date_epochs = datetime.strptime(
-        date, DATE_TIME_FORMAT
-    ).timestamp()  # job date time epochs
-    current_datetime_epochs = datetime.now().timestamp()  # current time
-    # evalute date passed
-    return True if ((date_epochs - current_datetime_epochs) < 0) else False
+#     # .. epocs
+#     date_epochs = datetime.strptime(
+#         date, DATE_TIME_FORMAT
+#     ).timestamp()  # job date time epochs
+#     current_datetime_epochs = datetime.now().timestamp()  # current time
+#     # evalute date passed
+#     return True if ((date_epochs - current_datetime_epochs) < 0) else False
 
 
 # # update prices
@@ -92,12 +92,6 @@ def job_invoice_issue(instance):
     job_date = instance.job_date.strftime("%d/%m/%Y") if instance.job_date else ""
     job_time = instance.job_time.strftime("%H:%M") if instance.job_time else ""
 
-    # Many to many test
-    # print("Mid discount: ", instance.mid_discount)
-    # print("Return customer discount: ", instance.return_customer_discount)
-    # print("Extra discount: ", instance.extra_discount)
-    # print("Price adjustment: ", instance.price_adjustment)
-
     # total discounts
     total_discounts = (
         instance.mid_discount
@@ -135,7 +129,7 @@ def job_invoice_issue(instance):
         f"XCROSSING LINES TRANSPORT PTY(LTD) JOB INVOICE {instance.pk}",
         textContent,
         settings.EMAIL_HOST_USER,
-        [f"{instance.customer.email}"],  # "xcrossinglines@gmail.com"
+        [f"{instance.customer.email}", "xcrossinglines@gmail.com"],  #
     )
 
     sendEmail.attach_alternative(htmlContent, "text/html")
@@ -271,13 +265,30 @@ def completed_job(instance):
 #         instance.save()
 
 
+# @receiver(m2m_changed, sender=Job.routes.through)
+# def job_routes_added(sender, instance, action, **kwargs):
+#     if action == "post_add":
+#         if not instance.job_invoice_sent:
+#             job_invoice_issue(instance)
+#             instance.job_invoice_sent = True
+#             instance.save()
+
+
 @receiver(m2m_changed, sender=Job.routes.through)
 def job_routes_added(sender, instance, action, **kwargs):
     if action == "post_add":
         if not instance.job_invoice_sent:
-            job_invoice_issue(instance)
-            instance.job_invoice_sent = True
+
+            # force pricing recalculation
             instance.save()
+
+            # refresh from DB so we get the updated fields
+            instance.refresh_from_db()
+
+            job_invoice_issue(instance)
+
+            instance.job_invoice_sent = True
+            instance.save(update_fields=["job_invoice_sent"])
 
 
 #  .. executed before the model is saved
@@ -334,5 +345,5 @@ def before_saved(sender, instance, *args, **kwargs):
         )
         # ...........
         # job_invoice_issue(instance)
-        completed_job(instance)
-        jobCancellation(instance)
+        # completed_job(instance)
+        # jobCancellation(instance)
