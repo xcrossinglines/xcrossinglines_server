@@ -92,15 +92,25 @@ def job_invoice_issue(instance):
     job_date = instance.job_date.strftime("%d/%m/%Y") if instance.job_date else ""
     job_time = instance.job_time.strftime("%H:%M") if instance.job_time else ""
 
+    # Many to many test
+    # print("Mid discount: ", instance.mid_discount)
+    # print("Return customer discount: ", instance.return_customer_discount)
+    # print("Extra discount: ", instance.extra_discount)
+    # print("Price adjustment: ", instance.price_adjustment)
+
+    # total discounts
+    total_discounts = (
+        instance.mid_discount
+        + instance.return_customer_discount
+        + instance.extra_discount
+        + instance.price_adjustment
+    )
+
     # ... template data tData = template Data
     templateData = {
         "invoiceID": instance.pk,
         "baseFee": instance.base_fee,
-        "totalDiscounts": (
-            instance.mid_discount
-            + instance.return_customer_discount
-            + instance.extra_discount
-        ),
+        "totalDiscounts": total_discounts,
         "amountDue": instance.amount_due,
         "paymentOption": instance.payment_option,
         "clientNameAndSurname": clientNameAndSurname,
@@ -125,7 +135,7 @@ def job_invoice_issue(instance):
         f"XCROSSING LINES TRANSPORT PTY(LTD) JOB INVOICE {instance.pk}",
         textContent,
         settings.EMAIL_HOST_USER,
-        [f"{instance.customer.email}", "xcrossinglines@gmail.com"],
+        [f"{instance.customer.email}"],  # "xcrossinglines@gmail.com"
     )
 
     sendEmail.attach_alternative(htmlContent, "text/html")
@@ -202,8 +212,8 @@ def generate_return_customer_discount(new_quote, user_account):
 # .. send email
 def completed_job(instance):
 
-    print(instance, isinstance(instance, Job))
-    print("IS Job created, ", instance.job_completed)
+    # print(instance, isinstance(instance, Job))
+    # print("IS Job created, ", instance.job_completed)
     # .. first check if job complete
     if isinstance(instance, Job):
         # .. is job
@@ -240,7 +250,7 @@ def completed_job(instance):
 
                 # .. when done mark as sent
                 instance.feedback_email_sent = True
-                print("Are we even running this block of code 123211")
+                # print("Are we even running this block of code 123211")
 
                 return  # .. then break
             # .. cancel
@@ -323,6 +333,6 @@ def before_saved(sender, instance, *args, **kwargs):
             )
         )
         # ...........
-        job_invoice_issue(instance)
+        # job_invoice_issue(instance)
         completed_job(instance)
         jobCancellation(instance)
